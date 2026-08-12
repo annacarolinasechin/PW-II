@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_bhaskara.css">
+    <title>Calcular Bhaskara!</title>
+</head>
+<body>
+
+    <h1>CALCULE A FÓRMULA DE BHASKARA!</h1>
+    <h2>Insira os três coeficientes necessários!</h2>
+
+    <form action="#">
+        <input type="text" id="valor-a" name="a"> 
+        <label for="a">x² + </label>
+
+        <input type="text" id="valor-b" name="b">
+        <label for="b">x +</label>
+
+        <input type="text" id="valor-c" name="c">
+        <label for="c">= 0</label>
+        
+        <br>
+        <br>
+
+        <label for="valor-d">O valor de delta é: </label>
+        <input type="text" id="valor-delta" name="valor-d">
+
+        <br>
+        <br>
+
+
+        <span>O resultado é:</span>
+
+        <br>
+        <br>
+
+        <label for="raiz1">x1:</label>
+        <input type="text" id="raiz-1" name="raiz1">
+
+        <label for="raiz2">x2:</label>
+        <input type="text" id="raiz-2" name="raiz2">
+        
+        <br>
+        <br>
+
+        <input type="button" id="btn-calcular" value="Calcular!" class="btn">
+        <input type="reset" value="Limpar!" class="btn">
+    </form>
+
+    <script src="script_bhaskara.js"></script>
+</body>
+</html>
