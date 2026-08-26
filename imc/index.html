@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/style.css">
+    <title>Calculadora IMC e Peso Ideal</title>
+</head>
+
+<body>
+
+    <form>
+
+        <h1>CALCULADORA DE IMC E PESO IDEIAL</h1>
+        <label for="peso-kg">Seu peso (KG):</label>
+        <input type="text" id="peso-kg" name="peso-user" required>
+
+        <label for="altura-m">Sua altura (M):</label>
+        <input type="text" id="altura-m" name="altura-user" required>
+
+        <br>
+        <br>
+        <label for="sexo">Sexo:</label>
+        <input type="radio" id="feminino" name="sexo" value="feminino" required>
+        <label for="feminino">Feminino</label>
+
+        <input type="radio" id="masculino" name="sexo" value="masculino">
+        <label for="masculino">Masculino</label>
+
+        <br>
+        <br>
+        <label for="resultado-imc">Seu IMC é:</label>
+        <input type="text" id="resultado-imc" readonly>
+
+        <label for="peso-ideal">Seu peso ideal é:</label>
+        <input type="text" id="peso-ideal" readonly>
+
+        <p id="classifica">Classificação:</p>
+
+        <button type="button" id="btn-calcular" onClick="calcular()">Calcular!</button>
+        <button type="reset" id="btn-limpar" onClick="limpar()">Limpar!</button>
+
+    </form>
+
+    <script src="src/js/script.js"></script>
+</body>
+</html>
