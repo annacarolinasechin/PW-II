@@ -1,66 +1,158 @@
-function calcularDatas() {
-    let diaNasc = document.getElementById("dia-nasc").value;
-    let mesNasc = parseInt(document.getElementById("mes-nasc").value);
-    let anoNasc = parseInt(document.getElementById("ano-nasc").value);
-    let signo;
+function calcular() {
 
-    if (((mesNasc == 12) && (diaNasc >= 22)) ||(mesNasc == 1 && diaNasc <= 20)) {
-        signo = "Capricórnio";
+    var diaTxt = document.getElementById("dia").value;
+    var mesTxt = document.getElementById("mes").value;
+    var anoTxt = document.getElementById("ano").value;
+
+
+    if (isNaN(anoTxt) || anoTxt == "") {
+        alert("O ano não pode ser vazio ou conter letras!");
+        location.reload();
     }
-    else if ((mesNasc == 1 && diaNasc >= 21) ||(mesNasc == 2 && diaNasc <= 19)) {
-        signo = "Aquário";
-    }
-    else if ((mesNasc == 2 && diaNasc >= 20) ||(mesNasc == 2 && diaNasc <= 20)) {
-        signo = "Peixes";
-    }
-    else if ((mesNasc == 3 && diaNasc >= 21) ||(mesNasc == 4 && diaNasc <= 20)) {
-        signo = "Áries";
-    }
-    else if ((mesNasc == 4 && diaNasc >= 21) ||(mesNasc == 5 && diaNasc <= 20)) {
-        signo = "Touro";
+    if (anoTxt.length != 4) {
+        alert("Digite o ano com 4 dígitos!");
+        location.reload();
     }
 
-    else if ((mesNasc == 5 && diaNasc >= 21) ||(mesNasc == 6 && diaNasc <= 20)) {
-        signo = "Gêmeos";
-    }
-    else if ((mesNasc == 6 && diaNasc >= 21) ||(mesNasc == 7 && diaNasc <= 22)) {
-        signo = "Câncer";
-    }
-    else if ((mesNasc == 7 && diaNasc >= 23 ) || (mesNasc == 8 && diaNasc >= 22 )){
-       signo = "Leão" 
-    }
-    else if ((mesNasc == 8 && diaNasc == 23 ) && (mesNasc == 9 && diasNasc >=22 )){
-        signo = "Virgem"
+    var a_ani = parseInt(anoTxt);
+    var hoje = new Date();
+
+    if (a_ani > hoje.getFullYear()) {
+        alert("O ano não pode ser no futuro!");
+        location.reload();
     }
 
+    
+    if (isNaN(mesTxt) || mesTxt == "") {
+        alert("O mês não pode ser vazio!");
+        location.reload();
+    }
+
+    var m_ani = parseInt(mesTxt);
+    if (m_ani < 1 || m_ani > 12) {
+        alert("O mês deve ser entre 1 e 12!");
+        location.reload();
+    }
+
+    if (isNaN(diaTxt) || diaTxt == "") {
+        alert("O dia não pode ser vazio!");
+        location.reload();
+    }
+
+    var d_ani = parseInt(diaTxt);
+
+   
+    var ehBissexto = (a_ani % 4 == 0 && a_ani % 100 != 0) || (a_ani % 400 == 0);
+
+
+    if (m_ani == 2) {
+        if (ehBissexto && (d_ani < 1 || d_ani > 29)) {
+            alert("É ano bissexto! O dia para Fevereiro deve ser entre 1 e 29.");
+            location.reload();
+        } else if (!ehBissexto && (d_ani < 1 || d_ani > 28)) {
+            alert("Não é ano bissexto! O dia para Fevereiro deve ser entre 1 e 28.");
+            location.reload();
+        }
+    } 
+   
+    else if (m_ani == 4 || m_ani == 6 || m_ani == 9 || m_ani == 11) {
+        if (d_ani < 1 || d_ani > 30) {
+            alert("Este mês possui apenas 30 dias!");
+            location.reload();
+        }
+    } 
+
+    else {
+        if (d_ani < 1 || d_ani > 31) {
+            alert("Este mês possui no máximo 31 dias!");
+            location.reload();
+        }
+    }
 
 
 
+    var dataNasc = new Date(a_ani, m_ani - 1, d_ani);
 
-    let dianasc = new Array();
-    dianasc[0] = "um domingo";
-    dianasc[1] = "uma segunda";
-    dianasc[2] = "uma terça";
-    dianasc[3] = "uma quarta";
-    dianasc[4] = "uma quinta";
-    dianasc[5] = "uma sexta";
-    dianasc[6] = "um sábado";
+   
+    var nomeMes = "";
+    if (m_ani == 1) nomeMes = "Janeiro";
+    else if (m_ani == 2) nomeMes = "Fevereiro";
+    else if (m_ani == 3) nomeMes = "Março";
+    else if (m_ani == 4) nomeMes = "Abril";
+    else if (m_ani == 5) nomeMes = "Maio";
+    else if (m_ani == 6) nomeMes = "Junho";
+    else if (m_ani == 7) nomeMes = "Julho";
+    else if (m_ani == 8) nomeMes = "Agosto";
+    else if (m_ani == 9) nomeMes = "Setembro";
+    else if (m_ani == 10) nomeMes = "Outubro";
+    else if (m_ani == 11) nomeMes = "Novembro";
+    else if (m_ani == 12) nomeMes = "Dezembro";
 
+    document.getElementById("resMes").value = nomeMes;
 
-    let nomeMes = new Array();
-    nomeMes[0] = "Janeiro";
-    nomeMes[1] = "Fevereiro";
-    nomeMes[2] = "Março";
-    nomeMes[3] = "Abril";
-    nomeMes[4] = "Maio";
-    nomeMes[5] = "Junho";
-    nomeMes[6] = "Julho";
-    nomeMes[7] = "Agosto";
-    nomeMes[8] = "Setembro";
-    nomeMes[9] = "Outubro";
-    nomeMes[10] = "Novembro";
-    nomeMes[11] = "Dezembro";
+    
+    var numSemana = dataNasc.getDay();
+    var nomeSemana = "";
+    if (numSemana == 0) nomeSemana = "um domingo";
+    else if (numSemana == 1) nomeSemana = "uma segunda-feira";
+    else if (numSemana == 2) nomeSemana = "uma terça-feira";
+    else if (numSemana == 3) nomeSemana = "uma quarta-feira";
+    else if (numSemana == 4) nomeSemana = "uma quinta-feira";
+    else if (numSemana == 5) nomeSemana = "uma sexta-feira";
+    else if (numSemana == 6) nomeSemana = "um sábado";
 
+    document.getElementById("resSemana").value = nomeSemana;
 
+   
+    var idade = hoje.getFullYear() - a_ani;
+    var mesAtual = hoje.getMonth() + 1;
+    var diaAtual = hoje.getDate();
 
+    if (mesAtual < m_ani || (mesAtual == m_ani && diaAtual < d_ani)) {
+        idade--;
+    }
+
+    document.getElementById("resIdade").value = idade;
+
+  
+    if (((d_ani >= 22) && (m_ani == 12)) || ((d_ani <= 20) && (m_ani == 1))) 
+        document.images["signo"].src = "calcular_aniversario/src/assets/capricornio.jpg";
+
+    else if (((d_ani >= 21) && (m_ani == 1)) || ((d_ani <= 19) && (m_ani == 2))) 
+        document.images["signo"].src = "src/assets/img/aquario.jpg";
+
+    else if (((d_ani >= 20) && (m_ani == 2)) || ((d_ani <= 20) && (m_ani == 3))) 
+        document.images["signo"].src = "src/assets/img/peixes.jpg";
+    
+    else if (((d_ani >= 21) && (m_ani == 3)) || ((d_ani <= 20) && (m_ani == 4))) 
+        document.images["signo"].src = "src/assets/img/aries.jpg";
+
+    else if (((d_ani >= 21) && (m_ani == 4)) || ((d_ani <= 20) && (m_ani == 5))) 
+        document.images["signo"].src = "src/assets/img/touro.jpg";
+    
+    else if (((d_ani >= 21) && (m_ani == 5)) || ((d_ani <= 20) && (m_ani == 6))) 
+        document.images["signo"].src = "src/assets/img/gemeos.jpg";
+    
+    else if (((d_ani >= 21) && (m_ani == 6)) || ((d_ani <= 22) && (m_ani == 7))) 
+        document.images["signo"].src = "src/assets/img/cancer.jpg";
+
+    else if (((d_ani >= 23) && (m_ani == 7)) || ((d_ani <= 22) && (m_ani == 8))) 
+        document.images["signo"].src = "src/assets/img/leao.jpg";
+    
+    else if (((d_ani >= 23) && (m_ani == 8)) || ((d_ani <= 22) && (m_ani == 9))) 
+        document.images["signo"].src = "src/assets/img/virgem.jpg";
+    
+    else if (((d_ani >= 23) && (m_ani == 9)) || ((d_ani <= 22) && (m_ani == 10))) 
+        document.images["signo"].src = "src/assets/img/libra.jpg";
+    
+    else if (((d_ani >= 23) && (m_ani == 10)) || ((d_ani <= 21) && (m_ani == 11))) 
+        document.images["signo"].src = "src/assets/img/escorpiao.jpg";
+    
+    else if (((d_ani >= 22) && (m_ani == 11)) || ((d_ani <= 21) && (m_ani == 12))) 
+        document.images["signo"].src = "src/assets/img/sagitario.jpg";
+}
+
+function limpar() {
+    document.images["signo"].src = "../signo/src/assets/img/branco.jpg";
+    document.getElementById("dia").focus();
 }
